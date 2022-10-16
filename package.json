@@ -1,7 +1,7 @@
 {
-  "name": "@pnp/spfx-controls-react",
-  "description": "Reusable React controls for SharePoint Framework solutions",
-  "version": "3.11.0",
+  "name": "@kiyaka-motende/spfx-controls-react-sp-events",
+  "description": "Reusable React controls for SharePoint Framework solutions-edited by @kiyaka-motende to support sharepoint events list",
+  "version": "1.0.0",
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
@@ -109,7 +109,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pnp/sp-dev-fx-controls-react"
+    "url": "https://github.com/kiyaka-motende/sp-dev-fx-controls-react-sp-events"
   },
   "license": "MIT",
   "keywords": [
@@ -117,7 +117,9 @@
     "office365",
     "tools",
     "spfx",
-    "framework"
+    "framework",
+    "dynamic form",
+    "calendar events"
   ],
   "bugs": {
     "url": "https://github.com/pnp/sp-dev-fx-controls-react/issues"
@@ -129,7 +131,8 @@
     "Kent Chris <>",
     "Rodrigues, Joel <>",
     "Struyf, Elio <info@estruyf.be>",
-    "Terentiev, Alex <alex@aterentiev.com>"
+    "Terentiev, Alex <alex@aterentiev.com>",
+    "Motende, Harold <>"
   ],
   "jest": {
     "transform": {
