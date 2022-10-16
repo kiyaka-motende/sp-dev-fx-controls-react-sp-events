@@ -260,6 +260,7 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
     // try {
     const fieldCol = (this.state.fieldCollection || []).slice();
     const field = fieldCol.filter((element, i) => { return element.columnInternalName === internalName; })[0];
+    console.log(field);
     field.newValue = newValue;
     field.additionalData = additionalData;
     if (field.fieldType === "User" && newValue.length !== 0) {
@@ -459,6 +460,9 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
           else if (fieldType === "Boolean") {
             defaultValue = Boolean(Number(defaultValue));
           }
+          else if (fieldType === "AllDayEvent") {
+            defaultValue = Boolean(Number(defaultValue));
+          }
 
           tempFields.push({
             newValue: null,
@@ -537,10 +541,10 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
       const webAbsoluteUrl = !webUrl ? this.webURL : webUrl;
       let apiUrl = '';
       if (contentTypeId !== undefined && contentTypeId !== '') {
-        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/contenttypes('${contentTypeId}')/fields?@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false and (FromBaseType eq false or StaticName eq 'Title')`;
+        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/contenttypes('${contentTypeId}')/fields?@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false`;
       }
       else {
-        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/fields?@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false and (FromBaseType eq false or StaticName eq 'Title')`;
+        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/fields?@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false`;
       }
       const data = await context.spHttpClient.get(apiUrl, SPHttpClient.configurations.v1);
       if (data.ok) {

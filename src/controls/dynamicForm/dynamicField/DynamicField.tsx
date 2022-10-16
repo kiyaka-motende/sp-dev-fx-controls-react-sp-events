@@ -32,7 +32,8 @@ export class DynamicField extends React.Component<IDynamicFieldProps, IDynamicFi
       spfxContext: { pageContext: this.props.context.pageContext }
     });
     this.state = {
-      changedValue: props.fieldType === 'Thumbnail' ? props.fieldDefaultValue : null
+      changedValue: props.fieldType === 'Thumbnail' ? props.fieldDefaultValue : null,
+      dateFormat : props.dateFormat
     };
   }
 
@@ -338,6 +339,23 @@ export class DynamicField extends React.Component<IDynamicFieldProps, IDynamicFi
           {descriptionEl}
           {errorTextEl}
         </div>;
+              case 'AllDayEvent':
+                return <div>
+                  <div className={styles.titleContainer}>
+                    <Icon className={styles.fieldIcon} iconName={"CheckboxComposite"} />
+                    {labelEl}
+                  </div>
+                  <Toggle
+                    className={styles.feildDisplay}
+                    defaultChecked={defaultValue}
+                    onText={strings.Yes}
+                    offText={strings.No}
+                    onChange={(e, checkedvalue) => { this.onChange(checkedvalue); }}
+                    disabled={disabled}
+                  />
+                  {descriptionEl}
+                  {errorTextEl}
+                </div>;
 
       case 'User':
         return <div>
@@ -561,13 +579,16 @@ export class DynamicField extends React.Component<IDynamicFieldProps, IDynamicFi
       onChanged,
       columnInternalName
     } = this.props;
-
+    
     if (onChanged) {
       onChanged(columnInternalName, value);
     }
     this.setState({
       changedValue: value
     });
+    if(columnInternalName === 'AllDayEvent'){
+      console.log('New value: ',value);
+    }
   }
 
   private onBlur = (): void => {
