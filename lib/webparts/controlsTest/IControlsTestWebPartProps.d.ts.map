@@ -1,0 +1,1 @@
+{"version":3,"file":"IControlsTestWebPartProps.d.ts","sourceRoot":"","sources":["../../../src/webparts/controlsTest/IControlsTestWebPartProps.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,yBAAyB;IACxC,KAAK,EAAE,MAAM,CAAC;IACd,WAAW,EAAE,MAAM,CAAC;IACpB,UAAU,EAAE,MAAM,CAAC;CACpB"}
