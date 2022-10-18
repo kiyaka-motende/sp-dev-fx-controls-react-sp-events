@@ -263,6 +263,31 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
     console.log(field);
     field.newValue = newValue;
     field.additionalData = additionalData;
+    if (field.fieldType === 'AllDayEvent'){
+      if (newValue === true ){
+        const eventDateIndex = fieldCol.findIndex((value)=>{
+          return value.columnInternalName === 'EventDate'
+        });
+        fieldCol[eventDateIndex].dateFormat = 'DateOnly';
+
+        const endDateIndex = fieldCol.findIndex((value)=>{
+          return value.columnInternalName === 'EndDate'
+        });
+
+        fieldCol[endDateIndex].dateFormat = 'DateOnly';
+      }else if (newValue === false){
+        const eventDateIndex = fieldCol.findIndex((value)=>{
+          return value.columnInternalName === 'EventDate'
+        });
+        fieldCol[eventDateIndex].dateFormat = 'DateTime';
+
+        const endDateIndex = fieldCol.findIndex((value)=>{
+          return value.columnInternalName === 'EndDate'
+        });
+
+        fieldCol[endDateIndex].dateFormat = 'DateTime';
+      }
+    }
     if (field.fieldType === "User" && newValue.length !== 0) {
 
       if (newValue[0].id === undefined || parseInt(newValue[0].id, 10).toString() === "NaN") {

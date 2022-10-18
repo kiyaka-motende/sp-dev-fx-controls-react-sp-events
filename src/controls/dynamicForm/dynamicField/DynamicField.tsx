@@ -585,7 +585,7 @@ export class DynamicField extends React.Component<IDynamicFieldProps, IDynamicFi
     this.setState({
       changedValue: value
     });
-    if(columnInternalName === 'AllDayEvent'){
+    if(columnInternalName === 'fAllDayEvent'){
       console.log('New value: ',value);
     }
   }
