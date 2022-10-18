@@ -1,7 +1,7 @@
 {
   "name": "@kiyaka-motende/spfx-controls-react-sp-events",
   "description": "Reusable React controls for SharePoint Framework solutions-edited by @kiyaka-motende to support sharepoint events list",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "build": "gulp build",
     "clean": "gulp clean",
