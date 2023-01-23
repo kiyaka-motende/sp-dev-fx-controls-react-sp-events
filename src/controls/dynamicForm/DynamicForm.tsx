@@ -488,7 +488,10 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
           else if (fieldType === "AllDayEvent") {
             defaultValue = Boolean(Number(defaultValue));
           }
-
+          else if (fieldType === "Recurrence") {
+            defaultValue = Boolean(Number(defaultValue));
+          }
+          
           tempFields.push({
             newValue: null,
             fieldTermSetId: termSetId,

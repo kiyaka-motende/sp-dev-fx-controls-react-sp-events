@@ -338,23 +338,23 @@ export class DynamicField extends React.Component<IDynamicFieldProps, IDynamicFi
           {descriptionEl}
           {errorTextEl}
         </div>;
-          // case    'AllDayEvent':
-          //   return <div>
-          //     <div className={styles.titleContainer}>
-          //       <Icon className={styles.fieldIcon} iconName={"CheckboxComposite"} />
-          //       {labelEl}
-          //     </div>
-          //     <Toggle
-          //       className={styles.feildDisplay}
-          //       defaultChecked={defaultValue}
-          //       onText={strings.Yes}
-          //       offText={strings.No}
-          //       onChange={(e, checkedvalue) => { this.onChange(checkedvalue); }}
-          //       disabled={disabled}
-          //     />
-          //     {descriptionEl}
-          //     {errorTextEl}
-          //   </div>;
+          case    'Recurrence':
+            return <div>
+              <div className={styles.titleContainer}>
+                <Icon className={styles.fieldIcon} iconName={"CheckboxComposite"} />
+                {labelEl}
+              </div>
+              <Toggle
+                className={styles.feildDisplay}
+                defaultChecked={defaultValue}
+                onText={strings.Yes}
+                offText={strings.No}
+                // onChange={(e, checkedvalue) => { this.onChange(checkedvalue); }}
+                disabled={disabled}
+              />
+              {descriptionEl}
+              {errorTextEl}
+            </div>;
               case 'AllDayEvent':
                 return <div>
                   <div className={styles.titleContainer}>
