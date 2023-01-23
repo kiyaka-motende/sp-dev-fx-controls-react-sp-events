@@ -15,6 +15,7 @@ import { DateFormat, FieldChangeAdditionalData, IDynamicFieldProps } from './dyn
 import styles from './DynamicForm.module.scss';
 import { IDynamicFormProps } from './IDynamicFormProps';
 import { IDynamicFormState } from './IDynamicFormState';
+import { parseString } from 'xml2js';
 
 const stackTokens: IStackTokens = { childrenGap: 20 };
 
@@ -288,6 +289,12 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
         fieldCol[endDateIndex].dateFormat = 'DateTime';
       }
     }
+
+    //Handle recurrence 
+    if (field.fieldType === 'Recurrence'){
+
+    }
+
     if (field.fieldType === "User" && newValue.length !== 0) {
 
       if (newValue[0].id === undefined || parseInt(newValue[0].id, 10).toString() === "NaN") {
@@ -334,7 +341,7 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
       let item = null;
       if (listItemId !== undefined && listItemId !== null && listItemId !== 0)
         item = await spList.items.getById(listItemId).get();
-
+        
       if (contentTypeId === undefined || contentTypeId === '') {
         const defaultContentType = await spList.contentTypes.select("Id", "Name").get();
         contentTypeId = defaultContentType[0].Id.StringValue;
@@ -363,6 +370,8 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
           let richText = false;
           let dateFormat: DateFormat | undefined;
           let principalType = "";
+          let recurrenceInfo:string ="";
+
           if (item !== null) {
             defaultValue = item[field.EntityPropertyName];
           }
@@ -489,7 +498,15 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
             defaultValue = Boolean(Number(defaultValue));
           }
           else if (fieldType === "Recurrence") {
+            //capture all recurrence related data
             defaultValue = Boolean(Number(defaultValue));
+            recurrenceInfo = item.EventType === "4" && item.MasterSeriesItemID !== "" ? item.RecurrenceData : await this.returnExceptionRecurrenceInfo(item.RecurrenceData);
+            // spList.
+            console.log('Recurrence Data: ',await spList.items.getById(listItemId).select('RecurrenceData').get());
+            // console.log('Recurrence Data: ',item.RecurrenceData);
+            console.log('Event Type: ',item.EventType);
+            console.log('MasterSeriesItemID: ', item.MasterSeriesItemID);
+            console.log('Recurrence Info: ',recurrenceInfo);
           }
           
           tempFields.push({
@@ -588,4 +605,16 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
       return Promise.reject(error);
     }
   }
+
+  private async returnExceptionRecurrenceInfo(recurrenceData: string) {
+    const promise = new Promise<object>((resolve, reject) => {
+      parseString(recurrenceData, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+
+        resolve(result);
+      });
+    });
+}
 }

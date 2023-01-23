@@ -22,5 +22,6 @@ export declare class DynamicForm extends React.Component<IDynamicFormProps, IDyn
     private uplaodImage;
     private getImageArrayBuffer;
     private getFormFields;
+    private returnExceptionRecurrenceInfo;
 }
 //# sourceMappingURL=DynamicForm.d.ts.map
