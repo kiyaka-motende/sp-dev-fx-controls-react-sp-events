@@ -566,10 +566,10 @@ export class DynamicForm extends React.Component<IDynamicFormProps, IDynamicForm
       const webAbsoluteUrl = !webUrl ? this.webURL : webUrl;
       let apiUrl = '';
       if (contentTypeId !== undefined && contentTypeId !== '') {
-        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/contenttypes('${contentTypeId}')/fields?@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false`;
+        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/contenttypes('${contentTypeId}')/fields?&$select=RecurrenceData,*&@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false`;
       }
       else {
-        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/fields?@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false`;
+        apiUrl = `${webAbsoluteUrl}/_api/web/lists(@listId)/fields?&$select=RecurrenceData,*&@listId=guid'${encodeURIComponent(listId)}'&$filter=ReadOnlyField eq false and Hidden eq false`;
       }
       const data = await context.spHttpClient.get(apiUrl, SPHttpClient.configurations.v1);
       if (data.ok) {
